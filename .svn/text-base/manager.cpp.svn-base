@@ -1,0 +1,92 @@
+#include <iostream>
+#include <string>
+#include "sprite.h"
+#include "multisprite.h"
+#include "gamedata.h"
+#include "manager.h"
+
+Manager::~Manager() { 
+  // These deletions eliminate "definitely lost" and
+  // "still reachable"s in Valgrind.
+  for (unsigned i = 0; i < sprites.size(); ++i) {
+    delete sprites[i];
+  }
+}
+
+Manager::Manager() :
+  env( SDL_putenv(const_cast<char*>("SDL_VIDEO_CENTERED=center")) ),
+  io( IOManager::getInstance() ),
+  clock( Clock::getInstance() ),
+  screen( io.getScreen() ),
+  world("back", Gamedata::getInstance().getXmlInt("backFactor") ),
+  viewport( Viewport::getInstance() ),
+  sprites(),
+  currentSprite(0)
+{
+  if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+    throw string("Unable to initialize SDL: ");
+  }
+  atexit(SDL_Quit);
+  sprites.push_back( new MultiSprite("star") );
+  sprites.push_back( new Sprite("greenorb") );
+  sprites.push_back( new Sprite("redstar") );
+  viewport.setObjectToTrack(sprites[currentSprite]);
+}
+
+void Manager::draw() const {
+  world.draw();
+  for (unsigned i = 0; i < sprites.size(); ++i) {
+    sprites[i]->draw();
+  }
+
+  io.printMessageValueAt("Seconds: ", clock.getSeconds(), 10, 20);
+  io.printMessageValueAt("fps: ", clock.getFps(), 10, 40);
+  io.printMessageAt("Press T to switch sprites", 10, 70);
+  string message = "Tracking: "+ sprites[currentSprite]->getName(); 
+  io.printMessageAt(message, 10, 90);
+  SDL_Flip(screen);
+}
+
+void Manager::update() {
+  ++clock;
+  Uint32 ticks = clock.getElapsedTicks();
+  for (unsigned int i = 0; i < sprites.size(); ++i) {
+    sprites[i]->update(ticks);
+  }
+  world.update();
+  viewport.update(); // always update viewport last
+}
+
+void Manager::play() {
+  SDL_Event event;
+
+  bool done = false;
+  bool keyCatch = false;
+  while ( not done ) {
+
+    SDL_PollEvent(&event);
+    Uint8 *keystate = SDL_GetKeyState(NULL);
+    if (event.type ==  SDL_QUIT) { done = true; break; }
+    if(event.type == SDL_KEYUP) { 
+      keyCatch = false; 
+    }
+    if(event.type == SDL_KEYDOWN) {
+      if (keystate[SDLK_ESCAPE] || keystate[SDLK_q]) {
+        done = true;
+        break;
+      }
+      if (keystate[SDLK_t] && !keyCatch) {
+        keyCatch = true;
+        currentSprite = (currentSprite+1) % sprites.size();
+        viewport.setObjectToTrack(sprites[currentSprite]);
+      }
+      if (keystate[SDLK_s] && !keyCatch) {
+        keyCatch = true;
+        clock.toggleSloMo();
+      }
+    }
+
+    draw();
+    update();
+  }
+}

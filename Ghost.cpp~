@@ -1,0 +1,133 @@
+#include "ioManager.h"
+#include "Ghost.h"
+#include "frameFactory.h"
+#include "sprite.h"
+
+extern int keyPCheck;
+Ghost::~Ghost() {
+	delete strategy;
+	delete sghost;
+}
+void Ghost::advanceFrame(Uint32 ticks) {
+	timeSinceLastFrame += ticks;
+	if (timeSinceLastFrame > frameInterval) {
+    currentFrame = (currentFrame+1) % numberOfFrames;
+		timeSinceLastFrame = 0;
+	}
+}
+void Ghost::shoot(){
+	sghost->shoot();
+}
+Ghost::Ghost( const std::string& name) :
+  Drawable(name, 
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"RightX"), 
+                    Gamedata::getInstance().getXmlInt(name+"RightY")), 
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"RightInitialSpeed"),
+                    Gamedata::getInstance().getXmlInt(name+"RightSpeedY"))
+           ),
+  framesLeft( FrameFactory::getInstance().getTwoWayMultiSpriteLeftFrames(name+"Left") ),
+  framesRight( FrameFactory::getInstance().getTwoWayMultiSpriteRightFrames(name+"Right") ),
+  frames( FrameFactory::getInstance().getTwoWayMultiSpriteRightFrames(name+"Right") ),
+  worldWidth(Gamedata::getInstance().getXmlInt("worldWidth")),
+  worldHeight(Gamedata::getInstance().getXmlInt("worldHeight")),
+  dt(0),
+  currentFrame(0),
+  numberOfFrames( Gamedata::getInstance().getXmlInt(name+"RightFrames") ),
+  frameInterval( Gamedata::getInstance().getXmlInt(name+"RightFrameInterval") ),
+  timeSinceLastFrame( 0 ),
+  frameWidth(frames[0]->getWidth()),
+  frameHeight(frames[0]->getHeight()),
+  sghost( new ShootingSprite("ghost", framesLeft,framesRight) ),
+  strategy( new PerPixelCollisionStrategy )
+{ }
+
+Ghost::Ghost(const std::string& name,
+                         const Vector2f& pos, const Vector2f& vel,
+                         const std::vector<Frame*>& fmsLeft,const std::vector<Frame*>& fmsRight) : 
+  Drawable(name, pos, vel), 
+  framesLeft(fmsLeft),
+  framesRight(fmsRight),
+  frames(fmsRight),
+  worldWidth(Gamedata::getInstance().getXmlInt("worldWidth")),
+  worldHeight(Gamedata::getInstance().getXmlInt("worldHeight")),
+  dt(0),
+  currentFrame(0),
+  numberOfFrames( Gamedata::getInstance().getXmlInt(name+"LeftFrames") ),
+  frameInterval( Gamedata::getInstance().getXmlInt(name+"FrameInterval") ),
+  timeSinceLastFrame( 0 ),
+  frameWidth(fmsLeft[0]->getWidth()),
+  frameHeight(fmsLeft[0]->getHeight()),
+  sghost( new ShootingSprite("ghost", framesLeft,framesRight) ),
+  strategy( new PerPixelCollisionStrategy )
+{ }
+
+Ghost::Ghost(const Ghost& s) :
+  Drawable(s.getName(), s.getPosition(), s.getVelocity()), 
+  framesLeft(s.framesLeft),
+  framesRight(s.framesRight),
+  frames(s.framesRight),
+  worldWidth(Gamedata::getInstance().getXmlInt("worldWidth")),
+  worldHeight(Gamedata::getInstance().getXmlInt("worldHeight")),
+  dt(s.dt),
+  currentFrame(s.currentFrame),
+  numberOfFrames( s.numberOfFrames ),
+  frameInterval( s.frameInterval ),
+  timeSinceLastFrame( s.timeSinceLastFrame ),
+  frameWidth(s.frameWidth),
+  frameHeight(s.frameHeight),
+  sghost( s.sghost ),
+  strategy( new PerPixelCollisionStrategy )
+  { }
+
+void Ghost::draw() const {
+	sghost->draw();
+}
+void Ghost::goLeft() {
+    keyPCheck = 2;
+    if (sghost->X() > 0 ){
+      sghost->velocityX(-Gamedata::getInstance().getXmlInt("ghostRightSpeedX"));
+      sghost->velocityY(0);
+    }
+  
+}
+void Ghost::goRight() {
+  keyPCheck = 1;
+  if(sghost->X() < worldWidth - frameWidth){
+    sghost->velocityX(Gamedata::getInstance().getXmlInt("ghostRightSpeedX"));
+    sghost->velocityY(0);
+  }
+  
+}
+void Ghost::goUp() {
+  if(Y() > 0){
+    sghost->velocityY(-Gamedata::getInstance().getXmlInt("ghostRightSpeedX"));
+    sghost->velocityX(0);
+  }
+  
+}
+void Ghost::goDown() {
+  if(sghost->Y() < worldHeight - frameHeight){
+   sghost->velocityY(Gamedata::getInstance().getXmlInt("ghostRightSpeedX"));
+   sghost->velocityX(0);
+  }
+  
+}
+
+void Ghost::stop(){
+  sghost->velocityY(0);
+  sghost->velocityX(0);
+}
+void Ghost::update(Uint32 ticks) { 
+ ghost->update(ticks);
+}
+
+bool Ghost::collidedWith(const Drawable* obj) const{
+
+  return sghost->collidedWith(obj);
+}
+
+bool Ghost::collision(const Drawable* obj) const{
+  const Drawable* ghostp  =  static_cast<Drawable*> (sghost);
+  return strategy->execute(*ghostp, *obj);
+}
+

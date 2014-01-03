@@ -1,0 +1,68 @@
+#ifndef TWOWAYMULTISPRITE__H
+#define TWOWAYMULTISPRITE__H
+
+#include <string>
+#include <iostream>
+#include <vector>
+using std::string;
+
+#include "drawable.h"
+class CollisionStrategy;
+class twoWayMultiSprite : public Drawable {
+public:
+
+  twoWayMultiSprite(const string&);
+   
+  twoWayMultiSprite(const std::string&, const Vector2f& pos, const Vector2f& vel,
+              const std::vector<Frame*>& fmsLeft,const std::vector<Frame*>& fmsRight);
+
+  twoWayMultiSprite(const std::string&,const std::vector<Frame*>& fmsLeft,const std::vector<Frame*>& fmsRight);
+
+  twoWayMultiSprite(const twoWayMultiSprite&);
+
+  twoWayMultiSprite( const std::string&, float scale);
+  virtual int getType() const {return 3; }
+  virtual ~twoWayMultiSprite();
+
+  virtual void draw() const;
+  virtual void update(Uint32 ticks);
+  virtual const Frame* getFrame() const { 
+    return frames[currentFrame]; 
+  }
+ 
+  int randBetween(int low, int high);
+ 
+  float getScale() const{ 
+    return scale;
+  }
+  virtual bool collidedWith(const Drawable*) const;
+
+protected:
+  CollisionStrategy* strategy;
+  const std::vector<Frame *> framesLeft;
+  const std::vector<Frame *> framesRight;
+  std::vector<Frame *> frames;
+  int worldWidth;
+  int worldHeight;
+
+  float dt;
+  unsigned currentFrame;
+  unsigned numberOfFrames;
+  unsigned frameInterval;
+  float timeSinceLastFrame;
+  int frameWidth;
+  int frameHeight;
+  float scale;
+  void advanceFrame(Uint32 ticks);
+  twoWayMultiSprite& operator=(const twoWayMultiSprite&);
+
+};
+
+class isLess {
+public:
+  bool operator()(const twoWayMultiSprite* lhs, const twoWayMultiSprite* rhs) const {
+    return lhs->getScale() < rhs->getScale();
+  }
+};
+
+#endif

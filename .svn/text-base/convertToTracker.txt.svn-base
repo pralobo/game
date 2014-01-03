@@ -1,0 +1,26 @@
+
+(1) Draw the checkerboard in Manager:
+    -- get the right image into a surface
+    -- put the surface into a frame
+    -- draw the frame in manager.cpp
+
+(2) Add the World and Viewport to Manager:
+    -- put world.h and viewport.h into manager.h
+    -- initialize them in manager.cpp
+    -- set the objectToTrack in the constructor for Manager
+    -- draw the world
+    -- update the viewport
+    -- update the world
+
+(3) Modify frame.cpp so that it draws the object in viewport
+    coordinates rather than world coordinates:
+  x -= Viewport::getInstance().X();
+  y -= Viewport::getInstance().Y();
+  include viewport.h in frame.cpp
+
+(4) Change the game.xml file so that the viewport is, say, 640x480
+    and the world is 1280x960
+
+(5) add world and viewport to the Makefile
+
+(6) compile and watch!

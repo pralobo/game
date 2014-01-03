@@ -1,0 +1,181 @@
+<?xml version = "1.0"?>
+<GameData>
+
+<view>
+  <viewWidth>650</viewWidth>
+  <viewHeight>600</viewHeight>
+</view>
+
+<world>
+  <worldWidth>1000</worldWidth>
+  <worldHeight>769</worldHeight>
+</world>
+
+<screenTitle>Lobo's second project</screenTitle>
+
+<ghostBullet>bullet</ghostBullet>
+<hud>
+  <hudLocX>10</hudLocX>
+  <hudLocY>60</hudLocY>
+  <hudHeight>300</hudHeight>
+  <hudWidth>500</hudWidth>
+</hud>
+<back>
+  <backFile>images/back3.bmp</backFile>
+  <backFactor>2</backFactor>
+  <backSrcX>0</backSrcX>
+  <backSrcY>0</backSrcY>
+  <backWidth>1000</backWidth>
+  <backHeight>769</backHeight>
+  <backTransparency>false</backTransparency>
+</back>
+<front>
+  <frontFile>images/tfore3.bmp</frontFile>
+  <frontFactor>1</frontFactor>
+  <frontSrcX>0</frontSrcX>
+  <frontSrcY>0</frontSrcY>
+  <frontWidth>1000</frontWidth>
+  <frontHeight>769</frontHeight>
+  <frontTransparency>true</frontTransparency>
+</front>
+<font name="font">
+  <fontFile>font/dyslexic-bold.otf</fontFile>
+  <fontSize>15</fontSize>
+  <fontRed>255</fontRed>
+  <fontGreen>255</fontGreen>
+  <fontBlue>0</fontBlue>
+  <fontUnused>0</fontUnused>
+</font>
+<maxStringSize>50</maxStringSize>
+<numberOfBhoot>5</numberOfBhoot>
+<bat>
+  <batFile>images/bat.png</batFile>
+  <batLoc batX="320" batY="240"/>
+
+  <batFrames>3</batFrames>
+  <batFrameInterval>100</batFrameInterval>
+  <batChunks>50</batChunks>
+ <batChunkDistance>200</batChunkDistance>
+  <batSrcX>0</batSrcX>
+  <batSrcY>0</batSrcY>
+  <batWidth>111</batWidth>
+  <batHeight>82</batHeight>
+  <batSpeedX>200</batSpeedX>
+  <batSpeedY>-200</batSpeedY>
+  <batTransparency>true</batTransparency>
+</bat>
+
+
+<adjustingFactor1>0.9</adjustingFactor1>
+<adjustingFactor2>0.7</adjustingFactor2>
+<adjustingFactor3>1.25</adjustingFactor3>
+
+<cloud>
+  <cloudFile>images/cloud.bmp</cloudFile>
+  <cloudSrcX>0</cloudSrcX>
+  <cloudSrcY>0</cloudSrcY>
+  <cloudWidth>293</cloudWidth>
+  <cloudHeight>200</cloudHeight>
+  <cloudLoc cloudX="10" cloudY="10"/>
+  <cloudSpeed cloudSpeedMinX="10" cloudSpeedMaxX="40" cloudSpeedMinY="0" cloudSpeedMaxY="0"/>
+  <cloudTransparency>true</cloudTransparency>
+</cloud>
+
+
+
+<chalice>
+  <chaliceFile>images/chalice.bmp</chaliceFile>
+  <chaliceSrcX>0</chaliceSrcX>
+  <chaliceSrcY>0</chaliceSrcY>
+  <chaliceWidth>40</chaliceWidth>
+  <chaliceHeight>86</chaliceHeight>
+  <chaliceLoc chaliceX="10" chaliceY="10"/>
+  <chaliceSpeed chaliceSpeedMinX="10" chaliceSpeedMaxX="100" chaliceSpeedMinY="60" chaliceSpeedMaxY="100"/>
+  <chaliceTransparency>true</chaliceTransparency>
+</chalice>
+<smartbat>
+  <smartbatFile>images/smartbat.png</smartbatFile>
+  <smartbatNumber>1</smartbatNumber>
+  <smartbatLoc smartbatX="750" smartbatY="650"/>
+
+  <smartbatFrames>4</smartbatFrames>
+  <smartbatFrameInterval>100</smartbatFrameInterval>
+  <smartbatChunks>25</smartbatChunks>
+  <smartbatChunkDistance>200</smartbatChunkDistance>
+  <smartbatSrcX>0</smartbatSrcX>
+  <smartbatSrcY>0</smartbatSrcY>
+  <smartbatWidth>111</smartbatWidth>
+  <smartbatHeight>82</smartbatHeight>
+  <smartbatSpeedX>500</smartbatSpeedX>
+  <smartbatSpeedY>500</smartbatSpeedY>
+  <smartbatTransparency>true</smartbatTransparency>
+</smartbat>
+
+<helpMsg1>The intention of this game is to kill the bats and get as many points as possible</helpMsg1>
+<helpMsg2>Colliding with the bats will reduce health</helpMsg2>
+<helpMsg3>Once the health gets really low, health object is created to get additional health</helpMsg3>
+<helpMsg4>Arrow keys will be used to navigate our faithful ghost, space bar to shoot</helpMsg4>
+<helpMsg5>GO KILL THE BATS!</helpMsg5> 
+<helpMsgLoc>50</helpMsgLoc>
+
+
+
+ <Red>0</Red>
+  <Green>0</Green>
+  <Blue>0</Blue>
+<menuBack>
+  <menuBackFile>images/bp.bmp</menuBackFile>
+  <menuBackSrcX>0</menuBackSrcX>
+  <menuBackSrcY>0</menuBackSrcY>
+  <menuBackWidth>1000</menuBackWidth>
+  <menuBackHeight>769</menuBackHeight>
+  <menuBackLoc menuBackX="0" menuBackY="0"/>
+  <menuBackSpeed menuBackSpeedX="0" menuBackSpeedY="0"/>
+  <menuBackTransparency>false</menuBackTransparency>
+</menuBack>
+
+
+<lastFrames>100</lastFrames>
+<skyLimit>10</skyLimit>
+<ghost>
+  <ghostFile>images/newghost.png</ghostFile>
+  <ghostLoc ghostX="40" ghostY="300"/>
+  <ghostBullet>bullet</ghostBullet>
+  <ghostFrames>3</ghostFrames>
+  <ghostLeftFrames>3</ghostLeftFrames>
+  <ghostFrameInterval>5</ghostFrameInterval>
+  <ghostChunks>25</ghostChunks>
+  <ghostSrc ghostSrcX="0" ghostSrcY="0" />
+  <ghostLeftSrc ghostLeftSrcX="0" ghostLeftSrcY="147" />
+  <ghostWidth>152</ghostWidth>
+  <ghostHeight>147</ghostHeight>
+  <ghostSpeedX>250</ghostSpeedX>
+  <ghostSpeedY>0</ghostSpeedY>
+  <ghostMinY>0</ghostMinY>
+  <ghostTransparency>true</ghostTransparency>
+</ghost>
+<words0>Start Game</words0>
+  <words1>Difficulty Level</words1>
+  <words2>Help</words2>
+  <words3>Exit</words3>
+
+
+
+
+
+<bullet>
+  <bulletFile>images/bullet.bmp</bulletFile>
+  <bulletBulletInterval>50</bulletBulletInterval>
+  <bulletDistance>100</bulletDistance>
+  <bulletSpeedX>600</bulletSpeedX>
+  <bulletSpeedY>0</bulletSpeedY>
+  <bulletFrames>3</bulletFrames>
+  <bulletWidth>204</bulletWidth>
+  <bulletHeight>100</bulletHeight>
+  <bulletSrcX>0</bulletSrcX>
+  <bulletSrcY>0</bulletSrcY>
+  <bulletFrameInterval>5</bulletFrameInterval>
+  <bulletTransparency>true</bulletTransparency>
+</bullet>
+<numberOfSprites>4</numberOfSprites>
+</GameData>

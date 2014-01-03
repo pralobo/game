@@ -1,0 +1,35 @@
+#ifndef SPRITE__H
+#define SPRITE__H
+
+#include <string>
+#include <iostream>
+#include "drawable.h"
+class CollisionStrategy;
+class Sprite : public Drawable {
+public:
+  Sprite(const std::string&);
+  Sprite(const Sprite& s);
+  Sprite(const std::string& n, const Vector2f& pos, const Vector2f& vel,const Frame*);
+  virtual ~Sprite(); 
+  Sprite& operator=(const Sprite&);
+ 
+  virtual const Frame* getFrame() const { return frame; }
+  virtual void draw() const;
+  int randBetween(int low, int high);
+  virtual void update(Uint32 ticks);
+  virtual int getType() const {return 1; }
+
+  Vector2f getCenter() const { 
+    return Vector2f( X()+frame->getWidth()/2, Y()+frame->getHeight()/2 );
+  }
+
+private:
+  const Frame * frame;
+  int frameWidth;
+  int frameHeight;
+  int worldWidth;
+  int worldHeight;
+  CollisionStrategy* strategy;
+  int getDistance(const Sprite*) const;
+};
+#endif

@@ -1,0 +1,52 @@
+#include <string>
+#include <iostream>
+#include <vector>
+using std::string;
+#include "drawable.h"
+#include "shootingSprite.h"
+
+class Ghost : public Drawable{
+public:
+ Ghost(const string&);
+   
+  Ghost(const std::string&, const Vector2f& pos, const Vector2f& vel,
+              const std::vector<Frame*>& fmsLeft,const std::vector<Frame*>& fmsRight);
+
+  Ghost(const Ghost&);
+  virtual ~Ghost();
+
+  virtual void draw() const;
+  virtual void update(Uint32 ticks);
+  virtual const Frame* getFrame() const { 
+    return frames[currentFrame]; 
+  }
+  bool collidedWith(const Drawable*) const;
+  bool collision(const Drawable*) const;
+  virtual void goLeft();
+  virtual void goRight();
+  virtual void goUp();
+  virtual void goDown();
+  virtual void stop();
+  virtual void shoot();
+
+protected:
+  const std::vector<Frame *> framesLeft;
+  const std::vector<Frame *> framesRight;
+  std::vector<Frame *> frames;
+  int worldWidth;
+  int worldHeight;
+
+  float dt;
+  unsigned currentFrame;
+  unsigned numberOfFrames;
+  unsigned frameInterval;
+  float timeSinceLastFrame;
+  int frameWidth;
+  int frameHeight;
+
+  ShootingSprite* sghost;
+  CollisionStrategy* strategy;
+  void advanceFrame(Uint32 ticks);
+  Ghost& operator=(const Ghost&);
+  
+};

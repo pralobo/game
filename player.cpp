@@ -1,0 +1,150 @@
+#include "player.h"
+#include "ioManager.h"
+#include "collisionStrategy.h"
+
+extern int keyPCheck;
+
+
+Player::~Player() {
+  for (unsigned i = 0; i < ghostFrames.size(); ++i) {
+    delete ghostFrames[i];
+    delete ghostFramesLeft[i];
+    delete ghostCFrames[i];
+    delete ghostCFramesLeft[i];
+  }
+  SDL_FreeSurface(ghostSurface);
+  delete ghost;
+  delete strategy;
+}
+
+Player::Player() :
+  gdata( Gamedata::getInstance() ),
+  keyPressed(false),
+  worldWidth( gdata.getXmlInt("worldWidth") ), 
+  worldHeight( gdata.getXmlInt("worldHeight") ), 
+  ghostInitialVelocity( Vector2f(gdata.getXmlInt("ghostSpeedX"), 
+                               gdata.getXmlInt("ghostSpeedY") )
+  ), 
+  ghostWidth( gdata.getXmlInt("ghostWidth") ), 
+  ghostHeight( gdata.getXmlInt("ghostWidth") ),
+  ghostSurface( 
+    IOManager::getInstance().loadAndSet(gdata.getXmlStr("ghostFile"), 
+    gdata.getXmlBool("ghostTransparency") )
+  ),
+  ghostFrames(),
+  ghostFramesLeft(),
+  ghostCFrames(),
+  ghostCFramesLeft(),
+  ghost( NULL ),
+  strategy( new PerPixelCollisionStrategy )
+{ 
+  makeghost();
+}
+
+void Player::makeghost() {
+  unsigned numberOfFrames = gdata.getXmlInt("ghostFrames");
+  Uint16 pwidth = gdata.getXmlInt("ghostWidth");
+  Uint16 pheight = gdata.getXmlInt("ghostHeight");
+  Uint16 srcX = gdata.getXmlInt("ghostSrcX");
+  Uint16 srcY = gdata.getXmlInt("ghostSrcY");
+  Uint16 srcLeftY = gdata.getXmlInt("ghostLeftSrcY");
+  Uint16 srcLeft2Y = 2 * (gdata.getXmlInt("ghostLeftSrcY"));
+  Uint16 srcLeft3Y = 3 * (gdata.getXmlInt("ghostLeftSrcY"));
+
+
+  for (unsigned i = 0; i < numberOfFrames; ++i) {
+    unsigned frameX = i * pwidth + srcX;
+
+     ghostFrames.push_back( 
+      new Frame(ghostSurface, pwidth, pheight, frameX, srcY) );
+
+    ghostFramesLeft.push_back( 
+      new Frame(ghostSurface, pwidth, pheight, frameX, srcLeftY) );
+
+    ghostCFrames.push_back( 
+      new Frame(ghostSurface, pwidth, pheight, frameX, srcLeft2Y) );
+
+   ghostCFramesLeft.push_back( 
+      new Frame(ghostSurface, pwidth, pheight, frameX, srcLeft3Y) );
+ 
+
+  }
+  ghost = new ShootingSprite("ghost", ghostFramesLeft, ghostFrames, ghostCFramesLeft, ghostCFrames );
+}
+
+
+void Player::update(Uint32 ticks) { 
+  ghost->update(ticks); 
+
+  if (!keyPressed ) {
+	stop();
+   }
+  keyPressed = false;
+
+}
+
+void Player::cupdate(Uint32 ticks) { 
+  ghost->cupdate(ticks); 
+  if (!keyPressed ) {
+	ghost->cupdate(ticks); 
+	stop();
+  }
+  keyPressed = false;
+}
+
+void Player::stop() { 
+  ghost->velocityX(0);  
+  ghost->velocityY(0);  
+}
+
+void Player::goright() { 
+  keyPressed = true;
+  keyPCheck = 1;
+  if ( ghost->X() < worldWidth-ghostWidth) {
+    ghost->velocityX(ghostInitialVelocity[0]);
+  }
+} 
+void Player::goleft()  { 
+  keyPressed = true;
+  keyPCheck = 2;
+  if ( ghost->X() > 0) {
+    ghost->velocityX(-ghostInitialVelocity[0]);
+  }
+} 
+void Player::goup()    { 
+  keyPressed = true;
+  if ( ghost->Y() < Gamedata::getInstance().getXmlInt("ghostMinY") ) {
+    ghost->velocityY( abs( ghost->velocityY() ) );
+  }
+  else {
+    ghost->velocityY(-ghostInitialVelocity[0]);
+  }
+} 
+void Player::godown()  { 
+  keyPressed = true;
+  if ( ghost->Y() < worldHeight-ghostHeight) {
+    ghost->velocityY(ghostInitialVelocity[0]);
+  }
+} 
+float  Player::X() const{
+	return ghost->X();
+}
+
+float Player::Y() const{
+	return ghost->Y();
+}
+void Player::shoot(){
+	ghost->shoot();
+} 
+
+bool Player::collidedWith(const Drawable* obj) const{
+
+  return ghost->collidedWith(obj);
+}
+
+bool Player::collision(const Drawable* obj) const{
+  const Drawable* ghostp  =  static_cast<Drawable*> (ghost);
+  return strategy->execute(*ghostp, *obj);
+}
+
+

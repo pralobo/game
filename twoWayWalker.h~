@@ -1,0 +1,21 @@
+#ifndef TWOWAYWALKER__H
+#define TWOWAYWALKER__H
+
+#include <string>
+#include <iostream>
+#include <vector>
+using std::string;
+
+#include "drawable.h"
+#include "twoWayWalker.h"
+class twoWayWalker : public twoWayMultiSprite{
+public:
+
+  
+  virtual ~twoWayWalker() { } 
+
+
+  virtual void update(Uint32 ticks);
+
+};
+#endif

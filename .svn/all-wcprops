@@ -1,0 +1,185 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/repos/MALLOY_870assets-2013/!svn/ver/111/examples/sdl/tracker
+END
+sprite.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/sprite.cpp
+END
+ioManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/ioManager.h
+END
+gamedata.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/gamedata.h
+END
+manager.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/MALLOY_870assets-2013/!svn/ver/100/examples/sdl/tracker/manager.cpp
+END
+sprite.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/sprite.h
+END
+manager.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/manager.h
+END
+viewport.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/viewport.cpp
+END
+multisprite.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/multisprite.cpp
+END
+frameFactory.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/frameFactory.cpp
+END
+extractSurface.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/extractSurface.cpp
+END
+main.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/main.cpp
+END
+viewport.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/viewport.h
+END
+drawable.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/drawable.h
+END
+multisprite.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/multisprite.h
+END
+frameFactory.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/MALLOY_870assets-2013/!svn/ver/108/examples/sdl/tracker/frameFactory.h
+END
+world.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/world.cpp
+END
+extractSurface.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/extractSurface.h
+END
+frame.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/frame.cpp
+END
+vector2f.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/vector2f.cpp
+END
+clock.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/clock.cpp
+END
+parseXML.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/parseXML.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/Makefile
+END
+world.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/world.h
+END
+convertToTracker.txt
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/repos/MALLOY_870assets-2013/!svn/ver/111/examples/sdl/tracker/convertToTracker.txt
+END
+frame.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/MALLOY_870assets-2013/!svn/ver/105/examples/sdl/tracker/frame.h
+END
+vector2f.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/vector2f.h
+END
+clock.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/clock.h
+END
+parseXML.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/parseXML.h
+END
+ioManager.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/ioManager.cpp
+END
+gamedata.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/MALLOY_870assets-2013/!svn/ver/99/examples/sdl/tracker/gamedata.cpp
+END
