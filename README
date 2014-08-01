@@ -1,1 +1,7 @@
 This is a 2D game developed in C++
+Features:
+ - Collision Detection
+ - Object Pooling
+ - Singleton Pattern and Factory Pattern
+ - Sound
+ - Sprites made my be on Inkscape and gimp
